@@ -1,59 +1,51 @@
-<<<<<<< HEAD
 *.log
 .DS_Store
+Thumbs.db
+
+# Environment
 .env
 .env.backup
 .env.production
-.phpactor.json
-.phpunit.result.cache
-/.codex
-/.cursor/
+
+# IDE / Editor
 /.idea
-/.nova
-/.phpunit.cache
 /.vscode
+/.cursor/
 /.zed
-/auth.json
-/node_modules
+
+# Laravel core
+/vendor/
+/node_modules/
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
-_ide_helper.php
+
+# Cache & temp
+.phpunit.result.cache
+.phpunit.cache
+.phpactor.json
+
+# Auth & config
+auth.json
+
+# Homestead / Vagrant
 Homestead.json
 Homestead.yaml
-Thumbs.db
-=======
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+/.vagrant
 
-# Laravel 4 specific
+# Laravel legacy (optional support)
 bootstrap/compiled.php
 app/storage/
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
-# Laravel 5 & Lumen specific with changed public path
+# Alternative public path
 public_html/storage
 public_html/hot
 
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
+# Logs
+npm-debug.log
+yarn-error.log
 
-/public/build
-/storage/pail
-.env.backup
-.env.production
-.phpactor.json
-auth.json
->>>>>>> 83ea6fa6dbad7126d551c6853d483f5394f0bd04
+# Helper
+_ide_helper.php

@@ -52,3 +52,5 @@ Laravel is a web application framework with expressive, elegant syntax. It aims 
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+nama : Muh. Fahrudin Wahyu Nugroho
+NIM  : 220101095
