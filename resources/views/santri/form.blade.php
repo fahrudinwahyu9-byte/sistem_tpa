@@ -18,6 +18,35 @@
                 @method('PUT')
             @endif
 
+            @if(!$santri->exists)
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="username">Username Login</label>
+                        <input type="text" name="username" id="username" value="{{ old('username') }}" placeholder="username123" required>
+                        @error('username') <small style="color: #fca5a5;">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password Login</label>
+                        <input type="password" name="password" id="password" placeholder="Min. 6 karakter" required>
+                        @error('password') <small style="color: #fca5a5;">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            @else
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="username">Username (Tetap)</label>
+                        <input type="text" value="{{ $santri->user->username }}" readonly style="opacity: 0.7; cursor: not-allowed;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password Baru (Kosongkan jika tetap)</label>
+                        <input type="password" name="password" id="password" placeholder="Ubah password jika perlu">
+                        @error('password') <small style="color: #fca5a5;">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            @endif
+
             <div class="form-group">
                 <label for="nama_santri">Nama Lengkap Santri</label>
                 <input type="text" name="nama_santri" id="nama_santri" value="{{ old('nama_santri', $santri->nama_santri) }}" placeholder="Contoh: Ahmad Abdullah" required>

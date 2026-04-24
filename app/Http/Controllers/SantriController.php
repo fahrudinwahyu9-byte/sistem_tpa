@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Santri;
+use App\Models\User;
+
 
 class SantriController extends Controller
 {
@@ -51,31 +53,30 @@ class SantriController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:6',
             'nama_santri' => 'required|string|max:255',
             'umur' => 'required|integer|min:1',
             'nama_wali' => 'required|string|max:255',
             'jilid_bacaan' => 'required|string|max:50',
         ]);
 
-        // Create User account for the santri
-        $username = strtolower(str_replace(' ', '', $data['nama_santri']));
-        
-        // Ensure unique username
-        if (\App\Models\User::where('username', $username)->exists()) {
-            $username = $username . rand(10, 99);
-        }
-
-        $user = \App\Models\User::create([
-            'username' => $username,
-            'password' => 'santri123', // Default password
-            'role' => \App\Models\User::ROLE_SANTRI,
+        $user = User::create([
+            'username' => $request->username,
+            'password' => $request->password,
+            'role' => User::ROLE_SANTRI,
         ]);
 
-        $data['user_id'] = $user->id;
+        Santri::create([
+            'user_id' => $user->id,
+            'nama_santri' => $request->nama_santri,
+            'umur' => $request->umur,
+            'nama_wali' => $request->nama_wali,
+            'jilid_bacaan' => $request->jilid_bacaan,
+        ]);
 
-        Santri::create($data);
-        return redirect()->route('dashboard')->with('success', 'Data santri berhasil ditambahkan. Username login: ' . $username);
+        return redirect()->route('santri.progress')->with('success', 'Data santri berhasil ditambahkan. Username login: ' . $user->username);
     }
 
     public function show()
@@ -92,21 +93,27 @@ class SantriController extends Controller
     public function update(Request $request, string $id)
     {
         $santri = Santri::findOrFail($id);
-        $data = $request->validate([
+        $request->validate([
+            'password' => 'nullable|string|min:6',
             'nama_santri' => 'required|string|max:255',
             'umur' => 'required|integer|min:1',
             'nama_wali' => 'required|string|max:255',
             'jilid_bacaan' => 'required|string|max:50',
         ]);
 
-        $santri->update($data);
-        return redirect()->route('dashboard')->with('success', 'Data santri berhasil diperbarui.');
+        if ($request->filled('password')) {
+            $santri->user->update(['password' => $request->password]);
+        }
+
+        $santri->update($request->only(['nama_santri', 'umur', 'nama_wali', 'jilid_bacaan']));
+        
+        return redirect()->route('santri.progress')->with('success', 'Data santri berhasil diperbarui.');
     }
 
     public function destroy(string $id)
     {
         $santri = Santri::findOrFail($id);
         $santri->delete();
-        return redirect()->route('dashboard')->with('success', 'Data santri berhasil dihapus.');
+        return redirect()->route('santri.progress')->with('success', 'Data santri berhasil dihapus.');
     }
 }

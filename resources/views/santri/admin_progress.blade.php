@@ -35,9 +35,7 @@
     <div class="glass-card">
         <div style="padding: 1.5rem 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-size: 1.2rem;"><i class="fas fa-history" style="color: var(--accent);"></i> Progress Terbaru</h3>
-            <button class="btn" style="padding: 0.5rem 1rem; font-size: 0.8rem; background: rgba(255, 255, 255, 0.05); color: #fff;">
-                <i class="fas fa-print"></i> Cetak Laporan
-            </button>
+
         </div>
         <div class="table-container">
             <table>
