@@ -12,7 +12,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <i class="fas fa-mosque"></i> MasterSantri
+                <i class="fas fa-mosque"></i> Sistem TPA
             </div>
 
             <div class="sidebar-nav">
@@ -28,6 +28,11 @@
                     <a href="{{ route('santri.progress') }}" class="nav-item {{ request()->routeIs('santri.progress') ? 'active' : '' }}">
                         <i class="fas fa-book"></i> Progress Bacaan
                     </a>
+                    @if(auth()->user()->role === \App\Models\User::ROLE_ADMIN)
+                        <a href="{{ route('guru.index') }}" class="nav-item {{ request()->routeIs('guru.*') ? 'active' : '' }}">
+                            <i class="fas fa-chalkboard-teacher"></i> Data Guru
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -66,7 +71,7 @@
             </main>
 
             <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;">
-                &copy; 2026 TPA Management System &bull; Designed by Antigravity
+                &copy; 2026 TPA Management System &bull; By Wahyoe
             </footer>
         </div>
     </div>

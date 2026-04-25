@@ -44,7 +44,7 @@
             </form>
 
             <div style="margin-top: 2rem; font-size: 0.8rem; color: var(--text-muted);">
-                &copy; 2026 Management System TPA. All rights reserved.
+                &copy; 2026 TPA Management System &bull; By Wahyoe
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SantriController;
+use App\Http\Controllers\GuruController;
 
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/', [AuthController::class, 'login']);
@@ -24,5 +25,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/santri/{id}/edit', [SantriController::class, 'edit'])->name('santri.edit');
         Route::put('/santri/{id}', [SantriController::class, 'update'])->name('santri.update');
         Route::delete('/santri/{id}', [SantriController::class, 'destroy'])->name('santri.destroy');
+
+        // Guru CRUD
+        Route::resource('guru', GuruController::class);
     });
 });
